@@ -84,6 +84,7 @@
             this.lstFirmalar.Name = "lstFirmalar";
             this.lstFirmalar.Size = new System.Drawing.Size(191, 290);
             this.lstFirmalar.TabIndex = 3;
+            this.lstFirmalar.SelectedIndexChanged += new System.EventHandler(this.lstFirmalar_SelectedIndexChanged);
             // 
             // btnGetir
             // 
@@ -130,6 +131,7 @@
             this.btnHaritadaGoster.TabIndex = 8;
             this.btnHaritadaGoster.Text = "Haritada göster";
             this.btnHaritadaGoster.UseVisualStyleBackColor = true;
+            this.btnHaritadaGoster.Click += new System.EventHandler(this.btnHaritadaGoster_Click);
             // 
             // Form1
             // 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,22 @@ namespace XmlJsonServislerineBaglanma
             lblKod.Text = $"{doviz.Birim} {doviz.Ad} - {doviz.Kod}";
             lblDeger.Text = $"Alis: {doviz.Alis:c4}\nSatis: {doviz.Satis:c4}";
         }
+        private Four.Venue seciliFirma;
+        private void lstFirmalar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstFirmalar.SelectedItem == null) return;
+            seciliFirma = lstFirmalar.SelectedItem as Four.Venue;
+            lblFirmaAdi.Text = seciliFirma.location.address;
+        }
+        private void btnHaritadaGoster_Click(object sender, EventArgs e)
+        {
+            if (seciliFirma == null) return;
+            string enlem = seciliFirma.location.lat.ToString().Replace(",", ".");
+            string boylam = seciliFirma.location.lng.ToString().Replace(",", ".");
+            string url = $"https://www.google.com/maps/Q{enlem},{boylam},19z";
+            Process.Start(url);
+        }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -53,6 +70,8 @@ namespace XmlJsonServislerineBaglanma
 
             Doviz seciliDoviz = listBox1.SelectedItem as Doviz;
             this.Text = $"{seciliDoviz.Birim} {seciliDoviz.Ad} - {seciliDoviz.Kod} Alis: {seciliDoviz.Alis:c4} Satis: {seciliDoviz.Satis:c4}";
+
+           
         }
 
         private void btnGetir_Click(object sender, EventArgs e)
@@ -61,5 +80,7 @@ namespace XmlJsonServislerineBaglanma
             lstFirmalar.DataSource = liste.OrderBy(x=>x.name).ToList();
             lstFirmalar.DisplayMember = "name";
         }
+
+        
     }
 }
